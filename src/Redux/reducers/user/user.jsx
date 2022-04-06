@@ -1,4 +1,4 @@
-import { NAME_INPUT } from './index';
+import { NAME_INPUT } from '../../actions';
 
 const INICIAL_STATE = {
   name: '',
