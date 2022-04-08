@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -104,6 +103,7 @@ function mapStateToProps(state) {
 
 Login.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default connect(mapStateToProps)(Login);
