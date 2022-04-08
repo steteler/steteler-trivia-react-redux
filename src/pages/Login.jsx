@@ -14,7 +14,6 @@ class Login extends React.Component {
       name: '',
       email: '',
       isButtonDisable: true,
-      token: '',
     };
 
     this.saveOnRedux = this.saveOnRedux.bind(this);
@@ -40,13 +39,10 @@ class Login extends React.Component {
 
   async saveOnRedux(name, email) {
     const returnAPI = await fetchAPI();
-    this.setState({ token: returnAPI }, () => {
-      const { dispatch, history } = this.props;
-      const { token } = this.state;
-      dispatch(inputName(name, email));
-      dispatch(inputToken(token));
-      history.push('/game');
-    });
+    const { dispatch, history } = this.props;
+    dispatch(inputName(name, email));
+    dispatch(inputToken(returnAPI));
+    history.push('/game');
   }
 
   render() {
