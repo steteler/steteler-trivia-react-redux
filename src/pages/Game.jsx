@@ -1,13 +1,19 @@
 import React from 'react';
+import Header from '../Components/Header';
 
 class Game extends React.Component {
   componentDidMount() {
-    console.log('OLÁ MUNDO');
+    // console.log('OLÁ MUNDO');
   }
 
   render() {
     return (
-      <h1>Page game</h1>
+      <>
+        <Header />
+        <div>
+          <p>Page game</p>
+        </div>
+      </>
     );
   }
 }
