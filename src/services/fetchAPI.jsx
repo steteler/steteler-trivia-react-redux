@@ -4,7 +4,6 @@ export default (
     const endPoint = 'https://opentdb.com/api_token.php?command=request';
     const request = await fetch(endPoint);
     const data = await request.json();
-    console.log('Aqui');
-    return data;
+    return data.token;
   }
 );

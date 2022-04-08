@@ -1,96 +1,104 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { nameInput } from '../Redux/actions';
+import inputName from '../Redux/actions/login';
+import inputToken from '../Redux/actions/token';
+import fetchAPI from '../services/fetchAPI';
 
 class Login extends React.Component {
   constructor() {
     super();
+
     this.state = {
       name: '',
       email: '',
-      isLoginButtonDisabled: true,
+      isButtonDisable: true,
+      token: '',
     };
+
+    this.saveOnRedux = this.saveOnRedux.bind(this);
   }
 
   onInputChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({
-      [name]: value }, () => this.validationForm());
+    const { id, value } = target;
+    this.setState(
+      { [id]: value }, () => this.validationForm(),
+    );
   }
 
   validationForm = () => {
-    const minimNumber = 1;
+    const minNumber = 1;
     const { name, email } = this.state;
 
-    if (name.length > minimNumber && email.length > minimNumber) {
-      this.setState({ isLoginButtonDisabled: false });
+    if (name.length > minNumber && email.length > minNumber) {
+      this.setState({ isButtonDisable: false });
     } else {
-      this.setState({ isLoginButtonDisabled: true });
+      this.setState({ isButtonDisable: true });
     }
   }
 
+  async saveOnRedux(name, email) {
+    const returnAPI = await fetchAPI();
+    this.setState({ token: returnAPI }, () => {
+      const { dispatch, history } = this.props;
+      const { token } = this.state;
+      dispatch(inputName(name, email));
+      dispatch(inputToken(token));
+      history.push('/game');
+    });
+  }
+
   render() {
-    const { isLoginButtonDisabled, name, email } = this.state;
-    const { savedUser } = this.props;
+    const { isButtonDisable, name, email } = this.state;
 
     return (
       <div>
-        <form>
-          <label htmlFor="nameInput">
-            Nome:
-            <input
-              type="text"
-              name="name"
-              data-testid="input-player-name"
-              placeholder="Name"
-              onChange={ this.onInputChange }
-              value={ name }
+        <label htmlFor="name">
+          Nome:
+          <input
+            type="text"
+            id="name"
+            onChange={ this.onInputChange }
+            value={ name }
+            data-testid="input-player-name"
+          />
+        </label>
 
-            />
-          </label>
-          <label htmlFor="emailInput">
-            email:
-            <input
-              type="email"
-              name="email"
-              data-testid="input-gravatar-email"
-              placeholder="email"
-              onChange={ this.onInputChange }
-              value={ email }
-            />
-          </label>
-          <Link to="/game">
-            <button
-              data-testid="btn-play"
-              type="button"
-              disabled={ isLoginButtonDisabled }
-              onClick={ () => savedUser(name, email) }
-            >
-              Play
-            </button>
-          </Link>
-          <Link to="/Settings">
-            <button
-              className="button"
-              data-testid="btn-settings"
-              type="button"
-            >
-              Configurações
-            </button>
-          </Link>
-        </form>
+        <label htmlFor="email">
+          Email:
+          <input
+            type="email"
+            id="email"
+            onChange={ this.onInputChange }
+            value={ email }
+            data-testid="input-gravatar-email"
+          />
+        </label>
+
+        <button
+          type="button"
+          onChange={ this.onInputChange }
+          disabled={ isButtonDisable }
+          data-testid="btn-play"
+          onClick={ () => this.saveOnRedux(name, email) }
+        >
+          Play
+        </button>
+
       </div>
     );
   }
 }
-const mapDispatchToProps = (dispatch) => ({
-  savedUser: (nome, email) => dispatch(nameInput(nome, email)),
-});
 
-Login.propTypes = ({
-  savedUser: PropTypes.func.isRequired,
-});
+function mapStateToProps(state) {
+  return {
+    props1: state.loginReducer.name,
+  };
+}
 
-export default connect(null, mapDispatchToProps)(Login);
+Login.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+export default connect(mapStateToProps)(Login);
