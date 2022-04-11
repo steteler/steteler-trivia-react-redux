@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import inputName from '../Redux/actions/login';
 import inputToken from '../Redux/actions/token';
 import fetchAPI from '../services/fetchAPI';
+// import gravatarUrl from '../Redux/actions/gravatarImg';
 
 class Login extends React.Component {
   constructor() {
@@ -42,6 +43,7 @@ class Login extends React.Component {
     const { dispatch, history } = this.props;
     dispatch(inputName(name, email));
     dispatch(inputToken(returnAPI));
+    // dispatch(gravatarUrl(imgURL));
     history.push('/game');
   }
 
@@ -95,15 +97,9 @@ class Login extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    props1: state.loginReducer.name,
-  };
-}
-
 Login.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
-  dispatch: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect()(Login);
