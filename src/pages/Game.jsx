@@ -40,8 +40,14 @@ class Game extends React.Component {
             arrayQuestions.length && (
               [arrayQuestions[numQuest]].map((result, index) => (
                 <div key={ index }>
-                  <Questions { ...result } />
-                  <Answers { ...result } />
+                  <Questions
+                    category={ result.category }
+                    question={ result.question }
+                  />
+                  <Answers
+                    correctAnswers={ result.correct_answer }
+                    incorrectAnswers={ result.incorrect_answers }
+                  />
                 </div>
               )))
           }

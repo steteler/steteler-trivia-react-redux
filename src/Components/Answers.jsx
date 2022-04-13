@@ -4,51 +4,54 @@ import PropTypes from 'prop-types';
 class Answers extends Component {
   constructor() {
     super();
+
     this.state = {
       randomAnswers: [],
     };
   }
 
   componentDidMount() {
-    this.shuffleAnswers();
+    this.sortAnswers();
   }
 
   // Idéia retirada do https://flaviocopes.com/how-to-shuffle-array-javascript/
-  shuffleAnswers = () => {
-    const { correct_answer, incorrect_answers } = this.props;
+  sortAnswers = () => {
+    const { correctAnswers, incorrectAnswers } = this.props;
+    console.log(correctAnswers);
+    console.log(incorrectAnswers);
     const magicNumber = 0.5;
     this.setState({
-      randomAnswers: [correct_answer, ...incorrect_answers]
+      randomAnswers: [correctAnswers, ...incorrectAnswers]
         .sort(() => Math.random() - magicNumber),
     });
   }
 
   render() {
-    const { correct_answer} = this.props;
+    const { correctAnswers } = this.props;
     const { randomAnswers } = this.state;
     return (
       <div data-testid="answer-options">
-        {randomAnswers.length > 0 ? (
+        {randomAnswers.length && (
           randomAnswers.map((element, index) => (
             <button
               key={ index }
               type="button"
-              data-testid={ element.includes(correct_answer)
+              data-testid={ element.includes(correctAnswers)
                 ? 'correct-answer'
                 : `wrong-answer-${index}` }
             >
               {element}
             </button>
           ))
-        ) : (<h1>Erro</h1>) }
+        ) }
       </div>
     );
   }
 }
 
 Answers.propTypes = {
-  incorrect_answers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  correct_answer: PropTypes.number.isRequired,
+  incorrectAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  correctAnswers: PropTypes.string.isRequired,
 };
 
 export default Answers;
