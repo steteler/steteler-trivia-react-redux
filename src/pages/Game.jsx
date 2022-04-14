@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Answers from '../Components/Answers';
+import Timer from '../Components/Timer';
 import Header from '../Components/Header';
 import Questions from '../Components/Questions';
 import getQuestions from '../services/questionsApi';
@@ -46,6 +47,7 @@ class Game extends React.Component {
                     correctAnswers={ result.correct_answer }
                     incorrectAnswers={ result.incorrect_answers }
                   />
+                  <Timer />
                 </div>
               )))
           }
