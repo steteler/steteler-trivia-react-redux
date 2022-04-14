@@ -6,14 +6,12 @@ class Questions extends Component {
     const { category, question } = this.props;
     return (
       <div>
-        <div>
-          <p data-testid="question-category">
-            {category}
-          </p>
-          <p data-testid="question-text">
-            { question }
-          </p>
-        </div>
+        <p data-testid="question-category">
+          { category }
+        </p>
+        <p data-testid="question-text">
+          { question }
+        </p>
       </div>
     );
   }

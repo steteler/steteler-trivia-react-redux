@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import inputName from '../Redux/actions/login';
 import inputToken from '../Redux/actions/token';
 import fetchAPI from '../services/fetchAPI';
-// import gravatarUrl from '../Redux/actions/gravatarImg';
 
-class Login extends React.Component {
+class Login extends Component {
   constructor() {
     super();
 
@@ -17,17 +16,16 @@ class Login extends React.Component {
       isButtonDisable: true,
     };
 
+    this.onInputChange = this.onInputChange.bind(this);
+    this.validationForm = this.validationForm.bind(this);
     this.saveOnRedux = this.saveOnRedux.bind(this);
   }
 
-  onInputChange = ({ target }) => {
-    const { id, value } = target;
-    this.setState(
-      { [id]: value }, () => this.validationForm(),
-    );
+  onInputChange({ target: { id, value } }) {
+    this.setState({ [id]: value }, () => this.validationForm());
   }
 
-  validationForm = () => {
+  validationForm() {
     const minNumber = 1;
     const { name, email } = this.state;
 
@@ -39,16 +37,14 @@ class Login extends React.Component {
   }
 
   async saveOnRedux(name, email) {
-    const returnAPI = await fetchAPI();
     const { dispatch, history } = this.props;
     dispatch(inputName(name, email));
-    dispatch(inputToken(returnAPI));
-    // dispatch(gravatarUrl(imgURL));
+    dispatch(inputToken(await fetchAPI()));
     history.push('/game');
   }
 
   render() {
-    const { isButtonDisable, name, email } = this.state;
+    const { name, email, isButtonDisable } = this.state;
 
     return (
       <div>
