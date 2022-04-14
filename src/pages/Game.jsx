@@ -9,36 +9,34 @@ import getQuestions from '../services/questionsApi';
 class Game extends React.Component {
   constructor() {
     super();
+
     this.state = {
       arrayQuestions: [],
-      numQuest: 0,
+      numQuestion: 0,
     };
+
+    this.loadQuestion = this.loadQuestion.bind(this);
   }
 
   componentDidMount() {
-    this.apiQuestion();
-    // this.shuffleAnswers();
+    this.loadQuestion();
   }
 
-  apiQuestion = async () => {
-    const { Apiquestions } = this.props;
-    // const { arrayAnswers } = this.state;
-    const { results } = await getQuestions(Apiquestions);
-    this.setState({
-      arrayQuestions: results,
-      // arrayAnswers: await getQuestions(Apiquestions),
-    });
+  async loadQuestion() {
+    const { token } = this.props;
+    const { results } = await getQuestions(token);
+    this.setState({ arrayQuestions: results });
   }
 
   render() {
-    const { arrayQuestions, numQuest } = this.state;
+    const { arrayQuestions, numQuestion } = this.state;
     return (
       <>
         <Header />
         <div>
           {
             arrayQuestions.length && (
-              [arrayQuestions[numQuest]].map((result, index) => (
+              [arrayQuestions[numQuestion]].map((result, index) => (
                 <div key={ index }>
                   <Questions
                     category={ result.category }
@@ -61,11 +59,11 @@ class Game extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  Apiquestions: state.token,
+  token: state.token,
 });
 
 Game.propTypes = {
-  Apiquestions: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(Game);

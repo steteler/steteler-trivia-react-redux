@@ -6,21 +6,23 @@ import PropTypes from 'prop-types';
 class Header extends Component {
   constructor() {
     super();
+
     this.state = {
       gravatarUrl: '',
       score: 0,
     };
+
+    this.getImage = this.getImage.bind(this);
   }
 
   componentDidMount() {
     this.getImage();
   }
 
-  getImage = () => {
+  getImage() {
     const { email } = this.props;
     const Hash = md5(email).toString();
     const imgURL = `https://www.gravatar.com/avatar/${Hash}`;
-    // console.log(imgURL);
     this.setState({
       gravatarUrl: imgURL,
     });
@@ -29,7 +31,6 @@ class Header extends Component {
   render() {
     const { gravatarUrl, score } = this.state;
     const { nameUser } = this.props;
-    // console.log(nameUser);
     return (
       <div>
         <img data-testid="header-profile-picture" src={ gravatarUrl } alt="imgURL" />

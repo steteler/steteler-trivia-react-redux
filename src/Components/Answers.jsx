@@ -8,6 +8,8 @@ class Answers extends Component {
     this.state = {
       randomAnswers: [],
     };
+
+    this.sortAnswers = this.sortAnswers.bind(this);
   }
 
   componentDidMount() {
@@ -15,10 +17,8 @@ class Answers extends Component {
   }
 
   // Idéia retirada do https://flaviocopes.com/how-to-shuffle-array-javascript/
-  sortAnswers = () => {
+  sortAnswers() {
     const { correctAnswers, incorrectAnswers } = this.props;
-    console.log(correctAnswers);
-    console.log(incorrectAnswers);
     const magicNumber = 0.5;
     this.setState({
       randomAnswers: [correctAnswers, ...incorrectAnswers]
@@ -31,19 +31,21 @@ class Answers extends Component {
     const { randomAnswers } = this.state;
     return (
       <div data-testid="answer-options">
-        {randomAnswers.length && (
-          randomAnswers.map((element, index) => (
-            <button
-              key={ index }
-              type="button"
-              data-testid={ element.includes(correctAnswers)
-                ? 'correct-answer'
-                : `wrong-answer-${index}` }
-            >
-              {element}
-            </button>
-          ))
-        ) }
+        {
+          randomAnswers.length && (
+            randomAnswers.map((element, index) => (
+              <button
+                key={ index }
+                type="button"
+                data-testid={ element.includes(correctAnswers)
+                  ? 'correct-answer'
+                  : `wrong-answer-${index}` }
+              >
+                {element}
+              </button>
+            ))
+          )
+        }
       </div>
     );
   }
