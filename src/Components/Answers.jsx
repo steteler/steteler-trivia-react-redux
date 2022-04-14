@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../Answers.css';
 
 class Answers extends Component {
   constructor() {
@@ -7,9 +8,11 @@ class Answers extends Component {
 
     this.state = {
       randomAnswers: [],
+      isDisabled: false,
     };
 
     this.sortAnswers = this.sortAnswers.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -26,22 +29,37 @@ class Answers extends Component {
     });
   }
 
+  handleClick() {
+    this.setState({ isDisabled: true });
+  }
+
   render() {
     const { correctAnswers } = this.props;
-    const { randomAnswers } = this.state;
+    const { randomAnswers, isDisabled } = this.state;
+
     return (
       <div data-testid="answer-options">
         {
           randomAnswers.length && (
-            randomAnswers.map((element, index) => (
+            randomAnswers.map((answer, index) => (
               <button
                 key={ index }
                 type="button"
-                data-testid={ element.includes(correctAnswers)
-                  ? 'correct-answer'
-                  : `wrong-answer-${index}` }
+                disabled={ isDisabled }
+                className={
+                  isDisabled && (
+                    answer.includes(correctAnswers)
+                      ? 'correct-answer'
+                      : 'wrong-answer')
+                }
+                onClick={ this.handleClick }
+                data-testid={
+                  answer.includes(correctAnswers)
+                    ? 'correct-answer'
+                    : `wrong-answer-${index}`
+                }
               >
-                {element}
+                { answer }
               </button>
             ))
           )
