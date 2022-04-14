@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 class Timer extends Component {
   constructor() {
     super();
+
     this.state = {
-      count: 0,
-      stopCount: 0,
+      count: 30,
     };
 
     this.timer = this.timer.bind(this);
@@ -21,14 +21,18 @@ class Timer extends Component {
   // }
 
   timer() {
-    const { count, stopCount } = this.state;
     const ms = 1000;
-    setInterval(() => {
-      this.setState((prevState) => ({
-        count: prevState.count + 1,
-      }));
-    }, ms);
-    this.setState({ stopCount });
+    const interval = (
+      setInterval(() => {
+        const { count } = this.state;
+        if (count === 0) {
+          return clearInterval(interval);
+        }
+        this.setState((prevState) => ({
+          count: prevState.count - 1,
+        }));
+      }, ms)
+    );
   }
 
   // stopWatch(prevState) {
