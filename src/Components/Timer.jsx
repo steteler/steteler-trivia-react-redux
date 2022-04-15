@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import '../style/Timer.css';
 
 class Timer extends Component {
   constructor() {
@@ -16,10 +16,6 @@ class Timer extends Component {
     this.timer();
   }
 
-  // stopWatch(timer) {
-  //   clearInterval(timer);
-  // }
-
   timer() {
     const ms = 1000;
     const interval = (
@@ -35,24 +31,13 @@ class Timer extends Component {
     );
   }
 
-  // stopWatch(prevState) {
-  //   const { stopCount } = this.state;
-  //   if (prevState.count === 30) {
-  //     this.setState(
-  //       (prevState) => ({ stopCount: prevState.stopCount === 0 }),
-  //     );
-  //   }
-  // }
-
   render() {
     const { count } = this.state;
 
     return (
-      <div>
-        <p data-testid="question-category">
-          { count }
-        </p>
-      </div>
+      <p data-testid="question-category" className="trivia-timer">
+        { count }
+      </p>
     );
   }
 }

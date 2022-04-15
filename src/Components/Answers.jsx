@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import '../Answers.css';
+import '../style/Answers.css';
 
 class Answers extends Component {
   constructor() {
@@ -13,6 +13,7 @@ class Answers extends Component {
 
     this.sortAnswers = this.sortAnswers.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.addClass = this.addClass.bind(this);
   }
 
   componentDidMount() {
@@ -33,12 +34,22 @@ class Answers extends Component {
     this.setState({ isDisabled: true });
   }
 
+  addClass(answer, isDisabled, correctAnswers) {
+    if (isDisabled) {
+      if (answer.includes(correctAnswers)) {
+        return 'correct ';
+      }
+      return 'wrong ';
+    }
+    return '';
+  }
+
   render() {
     const { correctAnswers } = this.props;
     const { randomAnswers, isDisabled } = this.state;
 
     return (
-      <div data-testid="answer-options">
+      <div data-testid="answer-options" className="answer-options">
         {
           randomAnswers.length && (
             randomAnswers.map((answer, index) => (
@@ -46,12 +57,7 @@ class Answers extends Component {
                 key={ index }
                 type="button"
                 disabled={ isDisabled }
-                className={
-                  isDisabled && (
-                    answer.includes(correctAnswers)
-                      ? 'correct-answer'
-                      : 'wrong-answer')
-                }
+                className={ `${this.addClass(answer, isDisabled, correctAnswers)}answer` }
                 onClick={ this.handleClick }
                 data-testid={
                   answer.includes(correctAnswers)

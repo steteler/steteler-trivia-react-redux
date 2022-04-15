@@ -5,14 +5,14 @@ class Questions extends Component {
   render() {
     const { category, question } = this.props;
     return (
-      <div>
+      <>
         <p data-testid="question-category">
           { category }
         </p>
         <p data-testid="question-text">
           { question }
         </p>
-      </div>
+      </>
     );
   }
 }
