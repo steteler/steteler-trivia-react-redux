@@ -6,6 +6,7 @@ import Timer from '../Components/Timer';
 import Header from '../Components/Header';
 import Questions from '../Components/Questions';
 import getQuestions from '../services/questionsApi';
+import '../style/Game.css';
 
 class Game extends React.Component {
   constructor() {
@@ -34,27 +35,30 @@ class Game extends React.Component {
     return (
       <>
         <Header />
-        <div>
-          {
-            arrayQuestions.length && (
-              [arrayQuestions[numQuestion]].map((result, index) => (
-                <div key={ index }>
-                  <Questions
-                    category={ result.category }
-                    question={ result.question }
-                  />
-                  <Answers
-                    correctAnswers={ result.correct_answer }
-                    incorrectAnswers={ result.incorrect_answers }
-                  />
-                  <Timer />
-                </div>
-              )))
-          }
-          <button type="button">
-            PRÓXIMA
-          </button>
-        </div>
+        {
+          arrayQuestions.length ? (
+            <div className="trivia-container">
+              {
+                [arrayQuestions[numQuestion]].map((result, index) => (
+                  <div key={ index } className="trivia-content">
+                    <Questions
+                      category={ result.category }
+                      question={ result.question }
+                    />
+                    <Answers
+                      correctAnswers={ result.correct_answer }
+                      incorrectAnswers={ result.incorrect_answers }
+                    />
+                    <Timer />
+                    <button type="button" className="trivia-next-button">
+                      PRÓXIMA
+                    </button>
+                  </div>
+                ))
+              }
+            </div>
+          ) : <h2>Loading</h2>
+        }
       </>
     );
   }
