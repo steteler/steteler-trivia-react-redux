@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import '../style/Header.css';
+// import scoreCount from '../Redux/actions/score';
 
 class Header extends Component {
   constructor() {
@@ -28,6 +29,11 @@ class Header extends Component {
       gravatarUrl: imgURL,
     });
   }
+
+  // questionScore() {
+  //   const { scoreDispatch } = this.props;
+  //   console.log(scoreDispatch);
+  // }
 
   render() {
     const { gravatarUrl, score } = this.state;
@@ -57,7 +63,12 @@ class Header extends Component {
 const mapStateToProps = (state) => ({
   nameUser: state.loginReducer.name,
   email: state.loginReducer.gravatarEmail,
+  score: state.loginReducer.score,
 });
+
+// const mapDispatchToProps = (dispatch) => ({
+//   scoreDispatch: (score) => dispatch(scoreCount(score)),
+// });
 
 Header.propTypes = ({
   nameUser: PropTypes.string,
