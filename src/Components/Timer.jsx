@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import '../style/Timer.css';
 
@@ -18,10 +19,12 @@ class Timer extends Component {
 
   timer() {
     const ms = 1000;
+    const { callback } = this.props;
     const interval = (
       setInterval(() => {
         const { count } = this.state;
         if (count === 0) {
+          callback();
           return clearInterval(interval);
         }
         this.setState((prevState) => ({
@@ -41,5 +44,9 @@ class Timer extends Component {
     );
   }
 }
+
+Timer.propTypes = {
+  callback: PropTypes.func.isRequired,
+};
 
 export default Timer;

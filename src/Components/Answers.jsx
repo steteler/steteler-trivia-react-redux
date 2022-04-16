@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../style/Answers.css';
+import Timer from './Timer';
 
 class Answers extends Component {
   constructor() {
@@ -70,6 +71,7 @@ class Answers extends Component {
             ))
           )
         }
+        <Timer callback={ this.handleClick } />
       </div>
     );
   }

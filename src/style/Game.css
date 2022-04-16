@@ -7,7 +7,8 @@ button:hover {
 }
 
 .trivia-container {
-  background-color: gainsboro;
+  background-color: blueviolet;
+  border-radius: 4px;
   margin: 64px auto;
   max-width: 800px;
 }

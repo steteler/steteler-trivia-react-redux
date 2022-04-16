@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Answers from '../Components/Answers';
-import Timer from '../Components/Timer';
 import Header from '../Components/Header';
 import Questions from '../Components/Questions';
 import getQuestions from '../services/questionsApi';
 import '../style/Game.css';
+import Footer from '../Components/Footer';
 
 class Game extends React.Component {
   constructor() {
@@ -49,7 +49,6 @@ class Game extends React.Component {
                       correctAnswers={ result.correct_answer }
                       incorrectAnswers={ result.incorrect_answers }
                     />
-                    <Timer />
                     <button type="button" className="trivia-next-button">
                       PRÓXIMA
                     </button>
@@ -59,6 +58,7 @@ class Game extends React.Component {
             </div>
           ) : <h2>Loading</h2>
         }
+        <Footer />
       </>
     );
   }
