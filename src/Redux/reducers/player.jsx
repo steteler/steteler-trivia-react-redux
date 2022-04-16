@@ -3,7 +3,7 @@ import { INPUT_NAME } from '../actions/login';
 const INITIAL_STATE = {
   name: '',
   // assertions: 0,
-  // score: 0,
+  score: 0,
   gravatarEmail: '',
 };
 
@@ -14,7 +14,7 @@ const loginReducer = (state = INITIAL_STATE, action) => {
       ...state,
       name: action.name,
       // assertions: action.assertions,
-      // score: action.score,
+      score: action.score,
       gravatarEmail: action.gravatarEmail,
     };
   default:
