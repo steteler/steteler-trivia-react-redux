@@ -7,12 +7,16 @@
 }
 
 .answer {
-  background-color: blueviolet;
+  background-color: white;
   border: none;
-  color: white;
+  color: blueviolet;
   height: 50px;
   margin: 8px;
   width: 180px;
+}
+
+.answer:disabled {
+  opacity: 0.8;
 }
 
 .correct {
