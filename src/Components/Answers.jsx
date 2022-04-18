@@ -43,7 +43,7 @@ class Answers extends Component {
   }
 
   sumScore(target) {
-    if (target.className.includes('correct')) {
+    if (target && target.className.includes('correct')) {
       const { difficulty, dispatch, timer } = this.props;
       const hard = 3;
       const medium = 2;
