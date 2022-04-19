@@ -6,7 +6,7 @@ button:hover {
   cursor: pointer;
 }
 
-.trivia-container {
+.main-container {
   background-color: blueviolet;
   border-radius: 4px;
   margin: 64px auto;
