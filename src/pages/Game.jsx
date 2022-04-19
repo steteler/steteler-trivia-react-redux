@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import Answers from '../Components/Answers';
 import Header from '../Components/Header';
 import Questions from '../Components/Questions';
@@ -43,7 +44,9 @@ class Game extends Component {
   }
 
   render() {
+    const magicNum = 4;
     const { arrayQuestions, numQuestion, isVisible } = this.state;
+    if (numQuestion > magicNum) return <Redirect to="/feedback" />;
     return (
       <>
         <Header />
