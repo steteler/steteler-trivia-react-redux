@@ -6,14 +6,14 @@ class Questions extends Component {
   render() {
     const { category, question } = this.props;
     return (
-      <div className="trivia-questions-category">
+      <section className="trivia-questions-category">
         <p data-testid="question-category">
           { category }
         </p>
         <p data-testid="question-text">
           { question }
         </p>
-      </div>
+      </section>
     );
   }
 }
