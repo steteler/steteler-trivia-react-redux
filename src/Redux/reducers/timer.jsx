@@ -1,6 +1,6 @@
 import { INPUT_TIMER } from '../actions/timer';
 
-const INITIAL_STATE = 0;
+const INITIAL_STATE = 30;
 
 const timerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

@@ -111,8 +111,8 @@ Answers.propTypes = {
   timer: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  timer: state.timer,
-});
+function mapStateToProps(state) {
+  return { timer: state.timer };
+}
 
 export default connect(mapStateToProps)(Answers);

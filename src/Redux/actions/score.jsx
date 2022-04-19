@@ -1,4 +1,4 @@
-export const SCORE_COUNT = 'SCORE';
+export const SCORE_COUNT = 'SCORE_COUNT';
 
 const scoreCount = (score) => ({
   type: SCORE_COUNT,
