@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import timerCount from '../Redux/actions/timer';
 import '../style/Timer.css';
 
-class Timer extends Component {
+class Timer2 extends Component {
   constructor() {
     super();
 
@@ -12,14 +12,14 @@ class Timer extends Component {
       count: 30,
     };
 
-    this.timer = this.timer.bind(this);
+    this.timer3 = this.timer3.bind(this);
   }
 
   componentDidMount() {
-    this.timer();
+    this.timer3();
   }
 
-  timer() {
+  timer3() {
     const ms = 1000;
     const { callback, dispatch } = this.props;
 
@@ -27,13 +27,11 @@ class Timer extends Component {
       setInterval(() => {
         const { count } = this.state;
         const { stopTimer } = this.props;
+        dispatch(timerCount(count));
         if (stopTimer) {
-          dispatch(timerCount(count));
           return clearInterval(interval);
-        }
-        if (count === 0) {
+        } if (count === 0) {
           callback();
-          dispatch(timerCount(count));
           return clearInterval(interval);
         }
         this.setState((prevState) => ({
@@ -54,10 +52,10 @@ class Timer extends Component {
   }
 }
 
-Timer.propTypes = {
+Timer2.propTypes = {
   callback: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   stopTimer: PropTypes.bool.isRequired,
 };
 
-export default connect()(Timer);
+export default connect()(Timer2);
