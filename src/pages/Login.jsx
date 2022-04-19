@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import inputName from '../Redux/actions/login';
 import inputToken from '../Redux/actions/token';
 import fetchAPI from '../services/fetchAPI';
+import triviaLogo from '../trivia.png';
 
 class Login extends Component {
   constructor() {
@@ -48,6 +49,7 @@ class Login extends Component {
 
     return (
       <div>
+        <img src={ triviaLogo } alt="trivia logo" />
         <label htmlFor="name">
           Nome:
           <input
