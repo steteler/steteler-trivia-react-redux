@@ -57,7 +57,7 @@ class Timer extends Component {
 Timer.propTypes = {
   callback: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
-  stopTimer: PropTypes.number.isRequired,
+  stopTimer: PropTypes.bool.isRequired,
 };
 
 export default connect()(Timer);
