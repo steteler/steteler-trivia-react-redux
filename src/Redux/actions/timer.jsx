@@ -1,7 +1,7 @@
-export const TIMER = 'TIMER';
+export const INPUT_TIMER = 'INPUT_TIMER';
 
 const timerCount = (timer) => ({
-  type: TIMER,
+  type: INPUT_TIMER,
   timer,
 });
 
