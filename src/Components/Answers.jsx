@@ -36,28 +36,26 @@ class Answers extends Component {
 
   handleClick({ target } = {}) {
     this.setState({ isDisabled: true, stopTimer: true }, () => {
-      const { openNext } = this.props;
+      const { showNext } = this.props;
       this.sumScore(target);
-      openNext();
+      showNext();
     });
   }
 
   sumScore(target) {
-    if (target.className.includes('correct')) {
+    if (target && target.className.includes('correct')) {
       const { difficulty, dispatch, timer } = this.props;
       const hard = 3;
       const medium = 2;
       const easy = 1;
+      const points = 10;
       let score = 0;
-      const magicNumb = 10;
       if (difficulty === 'hard') {
-        score = magicNumb + (timer * hard);
-      }
-      if (difficulty === 'medium') {
-        score = magicNumb + (timer * medium);
-      }
-      if (difficulty === 'easy') {
-        score = magicNumb + (timer * easy);
+        score = points + (timer * hard);
+      } else if (difficulty === 'medium') {
+        score = points + (timer * medium);
+      } else {
+        score = points + (timer * easy);
       }
       dispatch(scoreCount(score));
     }
@@ -82,7 +80,7 @@ class Answers extends Component {
           randomAnswers.length && (
             randomAnswers.map((answer, index) => (
               <button
-                key={ index }
+                key={ answer }
                 type="button"
                 disabled={ isDisabled }
                 className={ `${this.addClass(answer, isDisabled, correctAnswers)}answer` }
@@ -107,7 +105,7 @@ class Answers extends Component {
 Answers.propTypes = {
   incorrectAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
   correctAnswers: PropTypes.string.isRequired,
-  openNext: PropTypes.func.isRequired,
+  showNext: PropTypes.func.isRequired,
   difficulty: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
