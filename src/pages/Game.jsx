@@ -37,12 +37,6 @@ class Game extends Component {
     this.setState((prevState) => (
       { numQuestion: prevState.numQuestion + 1, isVisible: false }
     ));
-    // const { history } = this.props;
-    // const { numQuestion } = this.state;
-    // console.log('passei aqui');
-  //   if (numQuestion > 4) {
-  //     history.push('/feedback');
-  //   }
   }
 
   showNext() {
