@@ -21,10 +21,9 @@ class Header extends Component {
 
   getImage() {
     const { email } = this.props;
-    const Hash = md5(email).toString();
-    const imgURL = `https://www.gravatar.com/avatar/${Hash}`;
+    const hash = md5(email).toString();
     this.setState({
-      gravatarUrl: imgURL,
+      gravatarUrl: `https://www.gravatar.com/avatar/${hash}`,
     });
   }
 
@@ -59,8 +58,10 @@ const mapStateToProps = (state) => ({
   score: state.player.score,
 });
 
-Header.propTypes = ({
-  nameUser: PropTypes.string,
-}).isRequired;
+Header.propTypes = {
+  nameUser: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+};
 
 export default connect(mapStateToProps)(Header);
