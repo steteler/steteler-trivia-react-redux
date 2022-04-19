@@ -14,13 +14,13 @@ class Game extends Component {
 
     this.state = {
       arrayQuestions: [],
-      question: 0,
+      numQuestion: 0,
       isVisible: false,
     };
 
     this.loadQuestion = this.loadQuestion.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
-    this.openNext = this.openNext.bind(this);
+    this.showNext = this.showNext.bind(this);
   }
 
   componentDidMount() {
@@ -34,33 +34,33 @@ class Game extends Component {
 
   nextQuestion() {
     this.setState((prevState) => (
-      { question: prevState.question + 1, isVisible: false }
+      { numQuestion: prevState.numQuestion + 1, isVisible: false }
     ));
   }
 
-  openNext() {
+  showNext() {
     this.setState({ isVisible: true });
   }
 
   render() {
-    const { arrayQuestions, question, isVisible } = this.state;
+    const { arrayQuestions, numQuestion, isVisible } = this.state;
     return (
       <>
         <Header />
         {
           arrayQuestions.length ? (
-            <div className="trivia-container">
+            <main className="main-container">
               <div className="trivia-content">
                 <Questions
-                  category={ arrayQuestions[question].category }
-                  question={ arrayQuestions[question].question }
+                  category={ arrayQuestions[numQuestion].category }
+                  question={ arrayQuestions[numQuestion].question }
                 />
                 <Answers
-                  key={ question }
-                  correctAnswers={ arrayQuestions[question].correct_answer }
-                  incorrectAnswers={ arrayQuestions[question].incorrect_answers }
-                  difficulty={ arrayQuestions[question].difficulty }
-                  openNext={ this.openNext }
+                  key={ arrayQuestions[numQuestion].question }
+                  correctAnswers={ arrayQuestions[numQuestion].correct_answer }
+                  incorrectAnswers={ arrayQuestions[numQuestion].incorrect_answers }
+                  difficulty={ arrayQuestions[numQuestion].difficulty }
+                  showNext={ this.showNext }
                 />
                 <button
                   type="button"
@@ -72,7 +72,7 @@ class Game extends Component {
                   PRÓXIMA
                 </button>
               </div>
-            </div>
+            </main>
           ) : <h2>Loading</h2>
         }
         <Footer />
