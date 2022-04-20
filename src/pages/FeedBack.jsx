@@ -9,6 +9,11 @@ class Feedback extends Component {
     history.push('/');
   }
 
+  playRankingGame = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  }
+
   //  feedbackQuote = () => {
   //    const { rightOnes } = this.props;
   //    const questValidation = 3;
@@ -46,6 +51,14 @@ class Feedback extends Component {
         >
           Play Again
         </button>
+        <button
+          onClick={ this.playRankingGame }
+          type="button"
+          data-testid="btn-ranking"
+        >
+          Ranking
+        </button>
+
         {/* <p> { score }</p> */}
         {/* <section>
           <h2 data-testid="feedback-text">{ this.feedbackQuote() }</h2>
