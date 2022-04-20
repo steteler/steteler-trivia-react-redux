@@ -43,10 +43,12 @@ class Header extends Component {
             { `Jogador: ${nameUser}` }
           </span>
         </div>
-        <span data-testid="header-score">
-          { `Pontos: ${score}` }
-        </span>
-
+        <section>
+          <span>Pontos: </span>
+          <span data-testid="header-score">
+            {score}
+          </span>
+        </section>
       </header>
     );
   }
