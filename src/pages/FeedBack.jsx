@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 
 class Feedback extends Component {
+  resectGame = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   //  feedbackQuote = () => {
   //    const { rightOnes } = this.props;
   //    const questValidation = 3;
@@ -33,6 +38,14 @@ class Feedback extends Component {
       <div>
         <Header />
         <h1 data-testid="feedback-text">Text FeedBack</h1>
+
+        <button
+          onClick={ this.resectGame }
+          type="button"
+          data-testid="btn-play-again"
+        >
+          Play Again
+        </button>
         {/* <p> { score }</p> */}
         {/* <section>
           <h2 data-testid="feedback-text">{ this.feedbackQuote() }</h2>
@@ -71,6 +84,10 @@ class Feedback extends Component {
 //   rightOnes: PropTypes.number,
 //   score: PropTypes.number,
 // }.isRequired;
+
+Feedback.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 function mapStateToProps(state) {
   return { score: state.player.score };
