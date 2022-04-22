@@ -1,6 +1,7 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import timerCount from '../Redux/actions/timer';
 import '../style/Timer.css';
 
@@ -10,6 +11,7 @@ class Timer2 extends Component {
   }
 
   timerSla() {
+    const magicNumber = 1000;
     const interval = (
       setInterval(() => {
         const { timer, dispatch, stopTimer, callback } = this.props;
@@ -21,7 +23,7 @@ class Timer2 extends Component {
           return clearInterval(interval);
         }
         dispatch(timerCount(timer - 1));
-      }, 1000)
+      }, magicNumber)
     );
   }
 
@@ -35,10 +37,12 @@ class Timer2 extends Component {
   }
 }
 
-// Timer2.propTypes = {
-//   callback: PropTypes.func.isRequired,
-//   dispatch: PropTypes.func.isRequired,
-// };
+Timer2.propTypes = {
+  timer: PropTypes.number.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  stopTimer: PropTypes.number.isRequired,
+  callback: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
