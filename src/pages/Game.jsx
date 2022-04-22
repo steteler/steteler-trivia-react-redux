@@ -116,12 +116,12 @@ class Game extends Component {
   }
 }
 
-function mapStateToProps({ token }) {
-  return { token };
-}
-
 Game.propTypes = {
   token: PropTypes.string.isRequired,
 };
+
+function mapStateToProps({ token }) {
+  return { token };
+}
 
 export default connect(mapStateToProps)(Game);
