@@ -8,6 +8,7 @@ import Answers from '../Components/Answers';
 import Footer from '../Components/Footer';
 import getQuestions from '../services/getQuestions';
 import '../style/Game.css';
+import { saveCount } from '../Redux/actions';
 
 class Game extends Component {
   constructor() {
@@ -35,6 +36,10 @@ class Game extends Component {
   }
 
   nextQuestion() {
+    const resetTimer = 30;
+    const { dispatch } = this.props;
+    dispatch(saveCount(resetTimer));
+
     this.setState((prevState) => (
       { questionNumber: prevState.questionNumber + 1, isVisible: false }
     ), () => {
@@ -75,9 +80,7 @@ class Game extends Component {
 
     const maxQuestions = 4;
 
-    if (questionNumber > maxQuestions) {
-      return <Redirect to="/feedback" />;
-    }
+    if (questionNumber > maxQuestions) return <Redirect to="/feedback" />;
     return (
       <>
         <Header />
