@@ -11,7 +11,8 @@ const INITIAL_STATE = {
   assertions: 0,
 };
 
-function player(state = INITIAL_STATE, { type, name, gravatarEmail, score, assertions }) {
+function loginReducer(state = INITIAL_STATE,
+  { type, name, gravatarEmail, score, assertions }) {
   switch (type) {
   case INPUT_LOGIN:
     return {
@@ -34,4 +35,4 @@ function player(state = INITIAL_STATE, { type, name, gravatarEmail, score, asser
   }
 }
 
-export default player;
+export default loginReducer;

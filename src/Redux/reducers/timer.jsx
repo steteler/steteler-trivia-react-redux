@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   intervalId: 0,
 };
 
-function timer(state = INITIAL_STATE, { type, seconds, intervalId }) {
+function timerReducer(state = INITIAL_STATE, { type, seconds, intervalId }) {
   switch (type) {
   case INPUT_SECONDS:
     return { ...state, seconds };
@@ -16,4 +16,4 @@ function timer(state = INITIAL_STATE, { type, seconds, intervalId }) {
   }
 }
 
-export default timer;
+export default timerReducer;

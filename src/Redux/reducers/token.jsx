@@ -2,13 +2,13 @@ import { INPUT_TOKEN } from '../actions';
 
 const INITIAL_STATE = '';
 
-function token(state = INITIAL_STATE, action) {
-  switch (action.type) {
+function tokenReducer(state = INITIAL_STATE, { type, token }) {
+  switch (type) {
   case INPUT_TOKEN:
-    return action.token;
+    return token;
   default:
     return state;
   }
 }
 
-export default token;
+export default tokenReducer;
