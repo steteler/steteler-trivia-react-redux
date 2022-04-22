@@ -1,40 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-class Ranking extends React.Component {
-    homeScreen = () => {
-      const { history } = this.props;
-      history.push('/');
-    }
-
-    render() {
-      return (
-        <div>
-
-          <div
-            data-testid="ranking-title"
-          >
-            <div>
-              {/* data-testid={ `player-name-${index}` }
+class Ranking extends Component {
+  render() {
+    return (
+      <div>
+        <div data-testid="ranking-title">
+          <div>
+            {/* data-testid={ `player-name-${index}` }
               data-testid={ `player-score-${index}` } */}
-              <p>colocar o name</p>
-              <p>colocar o score</p>
-            </div>
-            <button
-              onClick={ this.homeScreen }
-              type="button"
-              data-testid="btn-go-home"
-            >
-              home screen
-            </button>
+            <p>colocar o name</p>
+            <p>colocar o score</p>
           </div>
+          <Link
+            to="/"
+            data-testid="btn-go-home"
+          >
+            home screen
+          </Link>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 }
-
-Ranking.propTypes = {
-  history: PropTypes.objectOf(PropTypes.any).isRequired,
-};
 
 export default Ranking;

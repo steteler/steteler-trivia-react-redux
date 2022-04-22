@@ -1,61 +1,49 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import timerCount from '../Redux/actions/timer';
 import '../style/Timer.css';
 
 class Timer2 extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      count: 30,
-    };
-
-    this.timer3 = this.timer3.bind(this);
-  }
-
   componentDidMount() {
-    this.timer3();
+    this.timerSla();
   }
 
-  timer3() {
-    const ms = 1000;
-    const { callback, dispatch } = this.props;
-
+  timerSla() {
     const interval = (
       setInterval(() => {
-        const { count } = this.state;
-        const { stopTimer } = this.props;
-        dispatch(timerCount(count));
+        const { timer, dispatch, stopTimer, callback } = this.props;
         if (stopTimer) {
           return clearInterval(interval);
-        } if (count === 0) {
+        }
+        if (timer === 0) {
           callback();
           return clearInterval(interval);
         }
-        this.setState((prevState) => ({
-          count: prevState.count - 1,
-        }));
-      }, ms)
+        dispatch(timerCount(timer - 1));
+      }, 1000)
     );
   }
 
   render() {
-    const { count } = this.state;
-
+    const { timer } = this.props;
     return (
       <p data-testid="question-category" className="trivia-timer">
-        { count }
+        { timer }
       </p>
     );
   }
 }
 
-Timer2.propTypes = {
-  callback: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  stopTimer: PropTypes.bool.isRequired,
-};
+// Timer2.propTypes = {
+//   callback: PropTypes.func.isRequired,
+//   dispatch: PropTypes.func.isRequired,
+// };
 
-export default connect()(Timer2);
+function mapStateToProps(state) {
+  return {
+    timer: state.timer,
+  };
+}
+
+export default connect(mapStateToProps)(Timer2);
