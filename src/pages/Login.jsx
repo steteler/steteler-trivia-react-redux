@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import inputName from '../Redux/actions/login';
 import inputToken from '../Redux/actions/token';
-import fetchAPI from '../services/fetchAPI';
+import getToken from '../services/getToken';
 import triviaLogo from '../trivia.png';
 
 class Login extends Component {
@@ -14,41 +14,38 @@ class Login extends Component {
     this.state = {
       name: '',
       email: '',
-      isButtonDisable: true,
+      isBtnDisabled: true,
     };
 
     this.onInputChange = this.onInputChange.bind(this);
-    this.validationForm = this.validationForm.bind(this);
     this.saveOnRedux = this.saveOnRedux.bind(this);
   }
 
-  onInputChange({ target: { id, value } }) {
-    this.setState({ [id]: value }, () => this.validationForm());
+  onInputChange({ target }) {
+    this.setState({ [target.id]: target.value }, () => {
+      this.validateLogin();
+    });
   }
 
-  validationForm() {
-    const minNumber = 1;
+  validateLogin() {
     const { name, email } = this.state;
+    const minNumber = 1;
 
-    if (name.length > minNumber && email.length > minNumber) {
-      this.setState({ isButtonDisable: false });
-    } else {
-      this.setState({ isButtonDisable: true });
-    }
+    this.setState({ isBtnDisabled: name.length < minNumber || email.length < minNumber });
   }
 
   async saveOnRedux(name, email) {
     const { dispatch, history } = this.props;
     dispatch(inputName(name, email));
-    dispatch(inputToken(await fetchAPI()));
+    dispatch(inputToken(await getToken()));
     history.push('/game');
   }
 
   render() {
-    const { name, email, isButtonDisable } = this.state;
+    const { name, email, isBtnDisabled } = this.state;
 
     return (
-      <div>
+      <section>
         <img src={ triviaLogo } alt="trivia logo" />
         <label htmlFor="name">
           Nome:
@@ -74,23 +71,23 @@ class Login extends Component {
 
         <button
           type="button"
-          onChange={ this.onInputChange }
-          disabled={ isButtonDisable }
-          data-testid="btn-play"
+          disabled={ isBtnDisabled }
           onClick={ () => this.saveOnRedux(name, email) }
+          data-testid="btn-play"
         >
           Play
         </button>
-        <Link to="/Settings">
+
+        <Link to="/settings">
           <button
-            className="button"
-            data-testid="btn-settings"
             type="button"
+            data-testid="btn-settings"
           >
             Configurações
           </button>
         </Link>
-      </div>
+
+      </section>
     );
   }
 }
