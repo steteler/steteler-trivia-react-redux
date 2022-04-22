@@ -22,7 +22,7 @@ class Timer extends Component {
         const { seconds, callback } = this.props;
         if (seconds === 0) {
           callback();
-          return clearInterval(interval);
+          clearInterval(interval);
         }
         dispatch(saveCount(seconds - 1));
       }, magicNumber)
