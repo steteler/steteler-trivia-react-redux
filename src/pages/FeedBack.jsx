@@ -46,10 +46,10 @@ Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
 };
 
-function mapStateToProps({ player }) {
+function mapStateToProps({ player: { score, assertions } }) {
   return {
-    score: player.score,
-    assertions: player.assertions,
+    score,
+    assertions,
   };
 }
 

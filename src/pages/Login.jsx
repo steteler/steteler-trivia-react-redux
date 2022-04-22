@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import inputName from '../Redux/actions/login';
-import inputToken from '../Redux/actions/token';
+import { saveLogin, saveToken } from '../Redux/actions';
 import getToken from '../services/getToken';
 import triviaLogo from '../trivia.png';
 
@@ -36,8 +35,8 @@ class Login extends Component {
 
   async saveOnRedux(name, email) {
     const { dispatch, history } = this.props;
-    dispatch(inputName(name, email));
-    dispatch(inputToken(await getToken()));
+    dispatch(saveLogin(name, email));
+    dispatch(saveToken(await getToken()));
     history.push('/game');
   }
 
@@ -86,7 +85,6 @@ class Login extends Component {
             Configurações
           </button>
         </Link>
-
       </section>
     );
   }

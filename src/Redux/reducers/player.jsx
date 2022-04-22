@@ -1,35 +1,38 @@
-import { INPUT_NAME } from '../actions/login';
-import { SCORE_COUNT } from '../actions/score';
-import { ASSERTIONS_COUNT } from '../actions/assertions';
+import {
+  INPUT_LOGIN,
+  INPUT_SCORE,
+  INPUT_ASSERTIONS,
+} from '../actions';
 
 const INITIAL_STATE = {
   name: '',
   gravatarEmail: '',
-  assertions: 0,
   score: 0,
+  assertions: 0,
 };
 
-const player = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-  case INPUT_NAME:
+function loginReducer(state = INITIAL_STATE,
+  { type, name, gravatarEmail, score, assertions }) {
+  switch (type) {
+  case INPUT_LOGIN:
     return {
       ...state,
-      name: action.name,
-      gravatarEmail: action.gravatarEmail,
+      name,
+      gravatarEmail,
     };
-  case SCORE_COUNT:
+  case INPUT_SCORE:
     return {
       ...state,
-      score: state.score + action.score,
+      score: state.score + score,
     };
-  case ASSERTIONS_COUNT:
+  case INPUT_ASSERTIONS:
     return {
       ...state,
-      assertions: state.assertions + action.assertions,
+      assertions: state.assertions + assertions,
     };
   default:
     return state;
   }
-};
+}
 
-export default player;
+export default loginReducer;
