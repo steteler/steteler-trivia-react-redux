@@ -20,7 +20,7 @@ class Timer extends Component {
     const interval = (
       setInterval(() => {
         const { seconds, callback } = this.props;
-        if (seconds === 1) {
+        if (seconds === 0) {
           callback();
           clearInterval(interval);
         }
