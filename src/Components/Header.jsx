@@ -20,8 +20,8 @@ class Header extends Component {
   }
 
   getImage() {
-    const { email } = this.props;
-    const hash = md5(email).toString();
+    const { gravatarEmail } = this.props;
+    const hash = md5(gravatarEmail).toString();
     this.setState({
       gravatarUrl: `https://www.gravatar.com/avatar/${hash}`,
     });
@@ -29,7 +29,7 @@ class Header extends Component {
 
   render() {
     const { gravatarUrl } = this.state;
-    const { nameUser, score } = this.props;
+    const { name, score } = this.props;
     return (
       <header className="header-container">
         <div className="header-img-user">
@@ -37,10 +37,10 @@ class Header extends Component {
             data-testid="header-profile-picture"
             className="header-img"
             src={ gravatarUrl }
-            alt={ nameUser }
+            alt={ name }
           />
           <span data-testid="header-player-name">
-            { `Jogador: ${nameUser}` }
+            { `Jogador: ${name}` }
           </span>
         </div>
         <section>
@@ -54,16 +54,18 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  nameUser: state.player.name,
-  email: state.player.gravatarEmail,
-  score: state.player.score,
-});
-
 Header.propTypes = {
-  nameUser: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  gravatarEmail: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
 };
+
+function mapStateToProps({ player: { name, gravatarEmail, score } }) {
+  return {
+    name,
+    gravatarEmail,
+    score,
+  };
+}
 
 export default connect(mapStateToProps)(Header);
