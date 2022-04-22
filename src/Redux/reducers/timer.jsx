@@ -1,14 +1,19 @@
-import { INPUT_TIMER } from '../actions/timer';
+import { INPUT_SECONDS, INPUT_INTERVAL_ID } from '../actions';
 
-const INITIAL_STATE = 30;
+const INITIAL_STATE = {
+  seconds: 30,
+  intervalId: 0,
+};
 
-const timerReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-  case INPUT_TIMER:
-    return action.timer;
+function timer(state = INITIAL_STATE, { type, seconds, intervalId }) {
+  switch (type) {
+  case INPUT_SECONDS:
+    return { ...state, seconds };
+  case INPUT_INTERVAL_ID:
+    return { ...state, intervalId };
   default:
     return state;
   }
-};
+}
 
-export default timerReducer;
+export default timer;
