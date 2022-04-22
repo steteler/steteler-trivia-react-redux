@@ -121,6 +121,7 @@ class Game extends Component {
 
 Game.propTypes = {
   token: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ token }) {
