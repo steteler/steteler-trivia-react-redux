@@ -90,6 +90,8 @@ Answers.propTypes = {
   difficulty: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
+  sortedAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  correctAnswers: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
