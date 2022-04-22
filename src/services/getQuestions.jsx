@@ -3,7 +3,12 @@ export default (
     const request = await fetch(
       `https://opentdb.com/api.php?amount=5&token=${token}`,
     );
-    const { results } = await request.json();
-    return results;
+
+    try {
+      const { results } = await request.json();
+      return results;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
